@@ -1,0 +1,60 @@
+name: VabHub Resources CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Validate configuration files
+      run: |
+        # Validate YAML files
+        find config/ -name "*.yaml" -exec python -c "import yaml; yaml.safe_load(open('{}'))" \;
+        find config/ -name "*.yml" -exec python -c "import yaml; yaml.safe_load(open('{}'))" \;
+        
+        # Validate JSON files
+        find . -name "*.json" -exec python -c "import json; json.load(open('{}'))" \;
+    
+    - name: Validate Kubernetes manifests
+      run: |
+        kubectl apply --dry-run=client -f kubernetes/
+
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check for secrets in configuration
+      uses: gitleaks/gitleaks-action@v2
+      with:
+        config-path: .gitleaks.toml
+    
+    - name: Validate resource scripts
+      run: |
+        find scripts/ -name "*.sh" -exec bash -n {} \;
+
+  package:
+    runs-on: ubuntu-latest
+    needs: [validate, security]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Create resource package
+      run: |
+        mkdir -p dist
+        tar -czf dist/vabhub-resources-$(date +%Y%m%d).tar.gz config/ data/ scripts/ kubernetes/
+    
+    - name: Upload resource artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: vabhub-resources-package
+        path: dist/
