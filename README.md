@@ -1,200 +1,215 @@
 # VabHub-Resources
 
-VabHub 资源文件仓库，包含配置文件、数据模板和平台相关的二进制资源。
+VabHub 智能媒体资源管理系统 - 提供完整的资源配置、数据模板和平台相关的二进制资源。
+
+## 🎯 项目概述
+
+VabHub-Resources 是 VabHub 生态系统的核心资源仓库，负责管理整个系统的配置、数据和二进制资源。它提供了智能媒体识别、分类、重命名等功能的完整资源支持。
+
+### 核心功能
+
+- **智能媒体管理**: 支持电影、电视剧、动漫等多种媒体类型的智能识别和分类
+- **资源配置管理**: 统一的配置文件和模板管理，支持多环境部署
+- **数据模板系统**: 预定义的媒体数据库结构和用户配置文件模板
+- **平台二进制资源**: 跨平台的工具和依赖库二进制文件
+- **Kubernetes 部署**: 完整的容器化部署配置和编排文件
 
 ## 🚀 快速开始
 
-### 安装资源文件
-```bash
-# 复制资源文件到 VabHub-Core
-cp -r ./* ../VabHub-Core/app/helper/
+### 系统要求
 
-# 或使用安装脚本
+- **操作系统**: Linux (Ubuntu/CentOS), Windows 10/11, macOS 10.15+
+- **依赖**: Python 3.8+, Docker, Kubernetes (可选)
+- **存储**: 至少 1GB 可用空间
+
+### 安装步骤
+
+#### 方法一：使用安装脚本（推荐）
+```bash
+# 克隆仓库
+git clone https://github.com/your-org/VabHub-Resources.git
+cd VabHub-Resources
+
+# 运行安装脚本
 ./scripts/install_resources.sh
+
+# 验证安装
+./scripts/validate_resources.sh
 ```
 
-### 更新资源文件
+#### 方法二：手动安装
 ```bash
-# 从 GitHub 更新资源文件
-git pull origin main
+# 复制配置文件
+cp config/config.example.yaml config/config.yaml
 
-# 重新安装资源
-./scripts/install_resources.sh
+# 复制数据模板
+cp data/media_database.json /path/to/your/app/data/
+
+# 安装二进制资源（根据平台选择）
+cp -r binaries/linux/* /usr/local/bin/
 ```
 
-## 📁 项目结构
+## 📁 项目结构详解
 
 ```
 VabHub-Resources/
-├── config/                 # 配置文件模板
-│   ├── config.example.yaml
-│   ├── categories.yaml
-│   ├── classifiers.yaml
-│   └── services.json
-├── data/                  # 数据模板
-│   ├── media_database.json
-│   ├── user_profiles.json
-│   └── plugin_templates/
-├── docs/                  # 文档资源
-│   ├── api/
-│   ├── tutorials/
-│   └── examples/
-├── binaries/              # 平台二进制文件
-│   ├── linux/
-│   ├── windows/
-│   ├── macos/
-│   └── docker/
-├── scripts/               # 工具脚本
-│   ├── install_resources.sh
-│   ├── update_resources.sh
-│   └── validate_resources.sh
-└── README.md
+├── config/                 # 配置文件目录
+│   ├── config.example.yaml    # 主配置模板
+│   ├── categories.yaml        # 媒体分类配置
+│   ├── classifiers.yaml       # 智能分类器配置
+│   └── services.json          # 服务配置
+├── data/                   # 数据模板目录
+│   ├── media_database.json    # 媒体数据库模板
+│   ├── user_profiles.json     # 用户配置文件模板
+│   └── plugin_templates/      # 插件模板
+├── docs/                   # 文档资源
+│   ├── api/                   # API 文档
+│   ├── tutorials/             # 教程文档
+│   └── examples/              # 使用示例
+├── binaries/               # 平台二进制文件
+│   ├── linux/                 # Linux 平台二进制
+│   ├── windows/               # Windows 平台二进制
+│   ├── macos/                 # macOS 平台二进制
+│   └── docker/                # Docker 镜像相关
+├── kubernetes/             # Kubernetes 部署配置
+│   ├── deployment.yaml        # 主部署配置
+│   ├── configmap.yaml         # 配置映射
+│   ├── postgres.yaml          # 数据库配置
+│   └── redis.yaml             # 缓存配置
+├── scripts/                # 工具脚本
+│   ├── install_resources.sh   # 安装脚本
+│   ├── update_resources.sh    # 更新脚本
+│   └── validate_resources.sh  # 验证脚本
+└── config.json             # 主应用配置
 ```
 
-## 🔧 资源类型
+## 🔧 配置说明
 
-### 配置文件模板
-- **config.example.yaml** - 主配置文件模板
-- **categories.yaml** - 媒体分类配置
-- **classifiers.yaml** - 智能分类器配置
-- **services.json** - 服务配置
+### 主配置文件 (config.json)
 
-### 数据模板
-- **media_database.json** - 媒体数据库模板
-- **user_profiles.json** - 用户配置模板
-- **plugin_templates/** - 插件开发模板
+```json
+{
+  "app_name": "SmartMedia Hub",
+  "version": "1.1.0",
+  "port": 8090,
+  "host": "0.0.0.0",
+  "debug": false,
+  "network_retry_count": 3,
+  "network_retry_delay": 2,
+  "batch_size": 10,
+  "supported_formats": ["mp4", "mkv", "avi", "mov"],
+  "max_file_size": "2GB"
+}
+```
 
-### 平台二进制文件
-- **Linux** - Linux 平台专用二进制文件
-- **Windows** - Windows 平台专用二进制文件  
-- **macOS** - macOS 平台专用二进制文件
-- **Docker** - Docker 容器内使用的二进制文件
+### 媒体分类配置 (config/categories.yaml)
 
-### 文档资源
-- **API 文档** - OpenAPI 规范文件
-- **教程文档** - 使用教程和示例
-- **开发文档** - 开发指南和最佳实践
-
-## 📊 配置文件说明
-
-### 主配置文件模板
 ```yaml
-# config.example.yaml
-server:
-  host: "0.0.0.0"
-  port: 8090
-  workers: 4
+# 电影分类
+movies:
+  - action:      # 动作片
+  - comedy:     # 喜剧片
+  - drama:      # 剧情片
+  - horror:     # 恐怖片
+  - sci-fi:     # 科幻片
 
-database:
-  type: "postgresql"
-  host: "localhost"
-  port: 5432
-  name: "vabhub"
-  username: "vabhub"
-  password: "${DB_PASSWORD}"
+# 电视剧分类
+tv_shows:
+  - series:     # 连续剧
+  - mini:       # 迷你剧
+  - reality:    # 真人秀
 
-media:
-  library_path: "/media"
-  supported_formats:
-    - "mp4"
-    - "mkv"
-    - "avi"
-    - "mov"
-  
-plugins:
-  enabled: true
-  auto_update: true
-  install_path: "./plugins"
+# 动漫分类
+anime:
+  - series:     # 动漫系列
+  - movies:     # 动漫电影
+  - ova:        # OVA
 ```
 
-### 分类配置
-```yaml
-# categories.yaml
-categories:
-  movie:
-    name: "电影"
-    patterns:
-      - "*电影*"
-      - "*Movie*"
-    
-  tv_show:
-    name: "电视剧"
-    patterns:
-      - "*剧集*"
-      - "*TV*"
-      - "*Season*"
+## 🛠️ 使用指南
+
+### 1. 媒体文件智能识别
+
+VabHub-Resources 提供了强大的媒体文件识别功能：
+
+```python
+from vabhub_resources import MediaRecognizer
+
+# 初始化识别器
+recognizer = MediaRecognizer()
+
+# 识别媒体文件
+result = recognizer.recognize("/path/to/media/file.mkv")
+print(f"识别结果: {result.title} ({result.year}) - {result.type}")
 ```
 
-## 🚀 部署和使用
+### 2. 批量重命名工具
 
-### 开发环境
+使用内置的重命名工具批量处理媒体文件：
+
 ```bash
-# 1. 克隆资源仓库
-git clone https://github.com/vabhub/vabhub-resources.git
+# 批量重命名媒体文件
+./scripts/rename_media.sh --input /path/to/media --template "{title} ({year})"
 
-# 2. 安装资源文件
-cd vabhub-resources
-./scripts/install_resources.sh
-
-# 3. 启动开发服务
-cd ../VabHub-Core
-python start.py
+# 带预览的重命名
+./scripts/rename_media.sh --input /path/to/media --preview
 ```
 
-### 生产环境
+### 3. 数据库管理
+
+```python
+from vabhub_resources import MediaDatabase
+
+# 初始化数据库
+db = MediaDatabase("media_database.json")
+
+# 添加媒体记录
+db.add_media({
+    "title": "示例电影",
+    "year": 2024,
+    "type": "movie",
+    "file_path": "/path/to/file.mkv"
+})
+
+# 查询媒体记录
+media_list = db.search_media("示例")
+```
+
+## 🚀 部署指南
+
+### Docker 部署
+
 ```bash
-# 使用 Docker 部署时，资源文件会自动复制
-cd VabHub-Deploy
-docker-compose up -d
+# 构建镜像
+docker build -t vabhub-resources:1.1.0 .
+
+# 运行容器
+docker run -d -p 8090:8090 -v /path/to/media:/media vabhub-resources:1.1.0
 ```
 
-### 资源验证
+### Kubernetes 部署
+
 ```bash
-# 验证资源文件完整性
-./scripts/validate_resources.sh
+# 应用所有配置
+kubectl apply -f kubernetes/
 
-# 检查资源版本
-./scripts/check_version.sh
+# 检查部署状态
+kubectl get pods -n media-renamer
+kubectl get services -n media-renamer
 ```
 
-## 🔌 平台适配
+## 📊 版本管理
 
-### Linux 平台
-```bash
-# Linux 专用二进制文件
-binaries/linux/ffmpeg
-binaries/linux/ffprobe
-binaries/linux/mediainfo
-```
+### 当前版本
+- **版本号**: 1.1.0
+- **发布日期**: 2025-10-27
+- **兼容性**: VabHub-Core >=1.0.0, VabHub-Plugins >=1.0.0
 
-### Windows 平台
-```cmd
-# Windows 专用二进制文件
-binaries\windows\ffmpeg.exe
-binaries\windows\ffprobe.exe
-binaries\windows\mediainfo.exe
-```
-
-### macOS 平台
-```bash
-# macOS 专用二进制文件
-binaries/macos/ffmpeg
-binaries/macos/ffprobe
-binaries/macos/mediainfo
-```
-
-## 📋 资源管理
-
-### 版本控制
-- 使用语义化版本控制 (SemVer)
-- 每个资源文件包含版本信息
-- 支持资源文件的增量更新
-
-### 依赖管理
+### 依赖关系
 ```json
 {
   "name": "vabhub-resources",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
     "vabhub-core": ">=1.0.0",
     "vabhub-plugins": ">=1.0.0"
@@ -203,64 +218,38 @@ binaries/macos/mediainfo
 }
 ```
 
-### 更新策略
-- 定期从上游源更新二进制文件
-- 配置文件变更时提供迁移脚本
-- 保持向后兼容性
+## 🔍 故障排除
 
-## 🔗 相关仓库
+### 常见问题
 
-- [VabHub-Core](https://github.com/vabhub/vabhub-core) - 后端核心服务
-- [VabHub-Frontend](https://github.com/vabhub/vabhub-frontend) - 前端界面
-- [VabHub-Plugins](https://github.com/vabhub/vabhub-plugins) - 插件系统
-- [VabHub-Deploy](https://github.com/vabhub/vabhub-deploy) - 部署配置
+1. **资源文件无法加载**
+   - 检查文件权限：`chmod +x scripts/*.sh`
+   - 验证文件路径：确保所有路径正确
+
+2. **配置验证失败**
+   - 检查配置文件格式：使用 `./scripts/validate_resources.sh`
+   - 查看日志文件：`tail -f /var/log/vabhub/resources.log`
+
+3. **Kubernetes 部署问题**
+   - 检查命名空间：`kubectl get namespaces`
+   - 查看 Pod 状态：`kubectl describe pod <pod-name>`
+
+### 获取帮助
+
+- 📖 查看详细文档：`docs/tutorials/`
+- 🐛 报告问题：GitHub Issues
+- 💬 社区讨论：Discord/Slack
 
 ## 🤝 贡献指南
 
-欢迎提交资源文件和改进！
-
-### 资源提交规范
-- 配置文件使用 YAML 格式
-- 二进制文件按平台分类
-- 提供完整的文档说明
-- 包含版本信息
-
-### 开发流程
-```bash
-# 1. Fork 仓库
-# 2. 克隆到本地
-git clone https://github.com/your-username/vabhub-resources.git
-
-# 3. 创建开发分支
-git checkout -b feature/your-resource
-
-# 4. 添加资源文件
-# 按照平台和类型分类存放
-
-# 5. 更新安装脚本
-# 修改 scripts/install_resources.sh
-
-# 6. 提交更改
-git commit -m "feat: add your resource"
-
-# 7. 推送到远程
-git push origin feature/your-resource
-
-# 8. 创建 Pull Request
-```
-
-### 测试要求
-- 验证配置文件语法正确性
-- 测试二进制文件兼容性
-- 确保跨平台一致性
-- 提供测试用例
+我们欢迎社区贡献！请参考：
+- `CONTRIBUTING.md` - 贡献指南
+- `CODE_OF_CONDUCT.md` - 行为准则
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
+本项目采用 MIT 许可证。详见 `LICENSE` 文件。
 
-## 📞 支持
+---
 
-- 文档: [VabHub Wiki](https://github.com/vabhub/vabhub-wiki)
-- 问题: [GitHub Issues](https://github.com/vabhub/vabhub-resources/issues)
-- 讨论: [GitHub Discussions](https://github.com/vabhub/vabhub-resources/discussions)
+**VabHub-Resources** - 让媒体管理更智能！ 🎬

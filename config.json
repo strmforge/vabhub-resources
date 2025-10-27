@@ -1,6 +1,6 @@
 {
   "app_name": "SmartMedia Hub",
-  "version": "4.2.0",
+  "version": "1.1.0",
   "port": 8090,
   "host": "0.0.0.0",
   "debug": false,

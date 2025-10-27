@@ -5,7 +5,7 @@ metadata:
   namespace: media-renamer
 data:
   app.name: "MediaRenamer Enhanced"
-  app.version: "2.0.0"
+  app.version: "1.1.0"
   app.debug: "false"
   
   # 数据库配置
