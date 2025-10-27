@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Validate configuration files
       run: |
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Check for secrets in configuration
       uses: gitleaks/gitleaks-action@v2
@@ -48,7 +48,7 @@ jobs:
     needs: [validate, security]
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Create resource package
       run: |
