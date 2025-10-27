@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 版本 1.2.0 (2025-10-28)
+
+### 🚀 新功能
+- 功能增强和性能优化
+
+### 🔧 技术改进
+- 代码质量和稳定性提升
+
+### 🐛 问题修复
+- 修复已知问题和bug
+
+
 ## [1.1.0] - 2025-10-27
 
 ### Added
