@@ -56,7 +56,7 @@ jobs:
         tar -czf dist/vabhub-resources-$(date +%Y%m%d).tar.gz config/ data/ scripts/ kubernetes/
     
     - name: Upload resource artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: vabhub-resources-package
         path: dist/
