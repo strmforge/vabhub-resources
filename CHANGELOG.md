@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 版本 1.3.0 (2025-10-28)
+
+### 🚀 新功能
+- **智能媒体分类系统**: 基于AI的智能媒体分类和标签系统
+- **增强的元数据管理**: 支持更多元数据源和自定义字段
+- **资源同步机制**: 多仓库资源同步和冲突解决机制
+- **备份恢复系统**: 完整的资源备份和快速恢复功能
+- **性能监控仪表板**: 资源使用情况和性能监控界面
+
+### 🔧 技术改进
+- **数据库优化**: 查询性能提升50%，支持更大规模数据
+- **缓存策略优化**: Redis缓存策略优化，命中率提升40%
+- **配置文件验证**: 增强的配置文件验证和错误提示
+- **API接口标准化**: RESTful API接口标准化和文档完善
+- **安全增强**: 资源访问权限控制和审计日志
+
+### 🐛 问题修复
+- 修复资源文件路径处理中的Unicode编码问题
+- 解决配置文件热重载时的内存泄漏问题
+- 修正Kubernetes部署中的服务发现配置
+- 修复媒体数据库索引损坏问题
+- 解决资源同步时的数据一致性问题
+
 ## 版本 1.2.0 (2025-10-28)
 
 ### 🚀 新功能
