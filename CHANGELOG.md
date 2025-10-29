@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 版本 1.4.0 (2025-10-29)
+
+### 🚀 新功能
+- **发现推荐系统资源支持**: 为VabHub 1.4.0发现推荐系统提供完整的资源配置
+- **音乐榜单数据模板**: 新增TME由你榜、Billboard China TME等音乐榜单数据模板
+- **影视数据源配置**: 扩展TMDB、豆瓣、Netflix Top 10、IMDb Datasets等数据源配置
+- **智能推荐算法资源**: 提供推荐算法权重配置和优先级设置模板
+- **前端资源优化**: 更新前端组件资源包，支持发现推荐界面
+
+### 🔧 技术改进
+- **资源配置标准化**: 统一所有数据源的资源配置格式
+- **缓存策略优化**: 为推荐系统提供优化的缓存配置
+- **API接口资源**: 完善发现推荐API的接口定义和文档
+- **性能监控资源**: 扩展性能监控指标，支持推荐系统性能追踪
+- **部署资源更新**: 更新Docker和Kubernetes部署配置
+
+### 🐛 问题修复
+- 修复资源配置验证逻辑
+- 解决数据源配置冲突问题
+- 修正API接口文档格式
+- 修复部署配置中的服务依赖问题
+
 ## 版本 1.3.0 (2025-10-28)
 
 ### 🚀 新功能
