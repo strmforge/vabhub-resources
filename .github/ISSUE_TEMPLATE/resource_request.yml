@@ -1,0 +1,24 @@
+---
+name: 📚 资源请求/更新
+description: 请求新增或更新资源（schema/regex/rules/icons/i18n）
+title: "[Resources] "
+labels: [resources]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 资源类型
+      options: ["schema","regex","rules","icons","i18n","examples"]
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: 详情
+  - type: checkboxes
+    id: compat
+    attributes:
+      label: 兼容性
+      options:
+        - label: 无破坏性变更
+        - label: 需要标注 major
